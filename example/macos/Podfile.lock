@@ -1,0 +1,22 @@
+PODS:
+  - dash_ffi_plugin (0.0.1):
+    - FlutterMacOS
+  - FlutterMacOS (1.0.0)
+
+DEPENDENCIES:
+  - dash_ffi_plugin (from `Flutter/ephemeral/.symlinks/plugins/dash_ffi_plugin/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+
+EXTERNAL SOURCES:
+  dash_ffi_plugin:
+    :path: Flutter/ephemeral/.symlinks/plugins/dash_ffi_plugin/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+
+SPEC CHECKSUMS:
+  dash_ffi_plugin: 349713644d815ca71aa24dd31ca3f99d42bdcf5a
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+
+PODFILE CHECKSUM: 353c8bcc5d5b0994e508d035b5431cfe18c1dea7
+
+COCOAPODS: 1.12.0
