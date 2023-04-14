@@ -9,6 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
+ferris_ffi_plugin/target/
 
 # IntelliJ related
 *.iml
