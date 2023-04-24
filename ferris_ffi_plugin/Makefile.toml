@@ -19,8 +19,14 @@ args = ["build", "--release"]
 
 [tasks.copy-lib-to-macos]
 description = "Copy rust plugin to macos folder"
-command = "cp"
-args = ["target/release/lib${PLUGIN_NAME}.dylib", "../macos"]
+# command = "cp"
+# args = ["target/release/lib${PLUGIN_NAME}.dylib", "../macos"]
+script = [
+'''
+cp $(PWD)/target/release/libferris_ffi_plugin.dylib $(PWD)/../macos/libferris_ffi_plugin.dylib
+install_name_tool -id "@rpath/libferris_ffi_plugin.dylib" $(PWD)/../macos/libferris_ffi_plugin.dylib
+'''
+]
 
 [tasks.clean-rust]
 description = "Clean rust plugin"
