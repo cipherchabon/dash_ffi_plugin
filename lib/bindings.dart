@@ -11,11 +11,12 @@ final bindings = DashFfiPluginBindings(_dylib);
 /// The dynamic library in which the symbols for [DashFfiPluginBindings] can be found.
 final DynamicLibrary _dylib = () {
   if (Platform.isMacOS) {
-    // if (kDebugMode) {
-    //   final currentPath = Directory.current.path;
-    //   print(currentPath);
-    //   return DynamicLibrary.open('$currentPath/macos/$_libName.dylib');
-    // }
+    final currentPath = Directory.current.path;
+
+    if (currentPath.contains('dash_ffi_plugin')) {
+      return DynamicLibrary.open('$currentPath/macos/$_libName.dylib');
+    }
+
     return DynamicLibrary.open('$_libName.dylib');
   } else {
     throw UnsupportedError('Unknown platform: ${Platform.operatingSystem}');

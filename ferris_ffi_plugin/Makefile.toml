@@ -17,10 +17,10 @@ description = "Build rust plugin"
 command = "cargo"
 args = ["build", "--release"]
 
+# Copy the Rust plugin's dylib to the macos folder and update its rpath to
+# enable relative path lookup. 
 [tasks.copy-lib-to-macos]
 description = "Copy rust plugin to macos folder"
-# command = "cp"
-# args = ["target/release/lib${PLUGIN_NAME}.dylib", "../macos"]
 script = [
 '''
 cp $(PWD)/target/release/libferris_ffi_plugin.dylib $(PWD)/../macos/libferris_ffi_plugin.dylib
