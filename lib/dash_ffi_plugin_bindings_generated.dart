@@ -26,19 +26,330 @@ class DashFfiPluginBindings {
           lookup)
       : _lookup = lookup;
 
-  int sum(
-    int a,
-    int b,
+  int get_max_c_char() {
+    return _get_max_c_char();
+  }
+
+  late final _get_max_c_charPtr =
+      _lookup<ffi.NativeFunction<ffi.Char Function()>>('get_max_c_char');
+  late final _get_max_c_char = _get_max_c_charPtr.asFunction<int Function()>();
+
+  int get_min_c_char() {
+    return _get_min_c_char();
+  }
+
+  late final _get_min_c_charPtr =
+      _lookup<ffi.NativeFunction<ffi.Char Function()>>('get_min_c_char');
+  late final _get_min_c_char = _get_min_c_charPtr.asFunction<int Function()>();
+
+  ffi.Pointer<ffi.Char> get_c_str() {
+    return _get_c_str();
+  }
+
+  late final _get_c_strPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
+          'get_c_str');
+  late final _get_c_str =
+      _get_c_strPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
+
+  /// # Safety
+  ///
+  /// The `name` argument must be a valid, non-null pointer to a null-terminated C string.
+  /// It is the caller's responsibility to ensure that the pointer is valid.
+  /// Calling this function with an invalid or null pointer will result in undefined behavior.
+  ffi.Pointer<ffi.Char> get_hello_world_with_name(
+    ffi.Pointer<ffi.Char> name,
   ) {
-    return _sum(
-      a,
-      b,
+    return _get_hello_world_with_name(
+      name,
     );
   }
 
-  late final _sumPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>('sum');
-  late final _sum = _sumPtr.asFunction<int Function(int, int)>();
+  late final _get_hello_world_with_namePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<ffi.Char>)>>('get_hello_world_with_name');
+  late final _get_hello_world_with_name = _get_hello_world_with_namePtr
+      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>();
+
+  double get_default_c_double() {
+    return _get_default_c_double();
+  }
+
+  late final _get_default_c_doublePtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function()>>(
+          'get_default_c_double');
+  late final _get_default_c_double =
+      _get_default_c_doublePtr.asFunction<double Function()>();
+
+  double get_default_c_float() {
+    return _get_default_c_float();
+  }
+
+  late final _get_default_c_floatPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function()>>('get_default_c_float');
+  late final _get_default_c_float =
+      _get_default_c_floatPtr.asFunction<double Function()>();
+
+  int get_max_c_int() {
+    return _get_max_c_int();
+  }
+
+  late final _get_max_c_intPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>('get_max_c_int');
+  late final _get_max_c_int = _get_max_c_intPtr.asFunction<int Function()>();
+
+  int get_min_c_int() {
+    return _get_min_c_int();
+  }
+
+  late final _get_min_c_intPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>('get_min_c_int');
+  late final _get_min_c_int = _get_min_c_intPtr.asFunction<int Function()>();
+
+  int get_max_c_long() {
+    return _get_max_c_long();
+  }
+
+  late final _get_max_c_longPtr =
+      _lookup<ffi.NativeFunction<ffi.Long Function()>>('get_max_c_long');
+  late final _get_max_c_long = _get_max_c_longPtr.asFunction<int Function()>();
+
+  int get_min_c_long() {
+    return _get_min_c_long();
+  }
+
+  late final _get_min_c_longPtr =
+      _lookup<ffi.NativeFunction<ffi.Long Function()>>('get_min_c_long');
+  late final _get_min_c_long = _get_min_c_longPtr.asFunction<int Function()>();
+
+  int get_max_c_longlong() {
+    return _get_max_c_longlong();
+  }
+
+  late final _get_max_c_longlongPtr =
+      _lookup<ffi.NativeFunction<ffi.LongLong Function()>>(
+          'get_max_c_longlong');
+  late final _get_max_c_longlong =
+      _get_max_c_longlongPtr.asFunction<int Function()>();
+
+  int get_min_c_longlong() {
+    return _get_min_c_longlong();
+  }
+
+  late final _get_min_c_longlongPtr =
+      _lookup<ffi.NativeFunction<ffi.LongLong Function()>>(
+          'get_min_c_longlong');
+  late final _get_min_c_longlong =
+      _get_min_c_longlongPtr.asFunction<int Function()>();
+
+  int get_max_c_schar() {
+    return _get_max_c_schar();
+  }
+
+  late final _get_max_c_scharPtr =
+      _lookup<ffi.NativeFunction<ffi.SignedChar Function()>>('get_max_c_schar');
+  late final _get_max_c_schar =
+      _get_max_c_scharPtr.asFunction<int Function()>();
+
+  int get_min_c_schar() {
+    return _get_min_c_schar();
+  }
+
+  late final _get_min_c_scharPtr =
+      _lookup<ffi.NativeFunction<ffi.SignedChar Function()>>('get_min_c_schar');
+  late final _get_min_c_schar =
+      _get_min_c_scharPtr.asFunction<int Function()>();
+
+  int get_max_c_short() {
+    return _get_max_c_short();
+  }
+
+  late final _get_max_c_shortPtr =
+      _lookup<ffi.NativeFunction<ffi.Short Function()>>('get_max_c_short');
+  late final _get_max_c_short =
+      _get_max_c_shortPtr.asFunction<int Function()>();
+
+  int get_min_c_short() {
+    return _get_min_c_short();
+  }
+
+  late final _get_min_c_shortPtr =
+      _lookup<ffi.NativeFunction<ffi.Short Function()>>('get_min_c_short');
+  late final _get_min_c_short =
+      _get_min_c_shortPtr.asFunction<int Function()>();
+
+  int get_max_c_uchar() {
+    return _get_max_c_uchar();
+  }
+
+  late final _get_max_c_ucharPtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedChar Function()>>(
+          'get_max_c_uchar');
+  late final _get_max_c_uchar =
+      _get_max_c_ucharPtr.asFunction<int Function()>();
+
+  int get_min_c_uchar() {
+    return _get_min_c_uchar();
+  }
+
+  late final _get_min_c_ucharPtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedChar Function()>>(
+          'get_min_c_uchar');
+  late final _get_min_c_uchar =
+      _get_min_c_ucharPtr.asFunction<int Function()>();
+
+  int get_max_c_uint() {
+    return _get_max_c_uint();
+  }
+
+  late final _get_max_c_uintPtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedInt Function()>>('get_max_c_uint');
+  late final _get_max_c_uint = _get_max_c_uintPtr.asFunction<int Function()>();
+
+  int get_min_c_uint() {
+    return _get_min_c_uint();
+  }
+
+  late final _get_min_c_uintPtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedInt Function()>>('get_min_c_uint');
+  late final _get_min_c_uint = _get_min_c_uintPtr.asFunction<int Function()>();
+
+  int get_max_c_ulong() {
+    return _get_max_c_ulong();
+  }
+
+  late final _get_max_c_ulongPtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedLong Function()>>(
+          'get_max_c_ulong');
+  late final _get_max_c_ulong =
+      _get_max_c_ulongPtr.asFunction<int Function()>();
+
+  int get_min_c_ulong() {
+    return _get_min_c_ulong();
+  }
+
+  late final _get_min_c_ulongPtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedLong Function()>>(
+          'get_min_c_ulong');
+  late final _get_min_c_ulong =
+      _get_min_c_ulongPtr.asFunction<int Function()>();
+
+  /// # Safety
+  /// The returned pointer must be freed with `free_c_char_ptr`.
+  ffi.Pointer<ffi.Char> get_max_c_ulong_as_string() {
+    return _get_max_c_ulong_as_string();
+  }
+
+  late final _get_max_c_ulong_as_stringPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
+          'get_max_c_ulong_as_string');
+  late final _get_max_c_ulong_as_string = _get_max_c_ulong_as_stringPtr
+      .asFunction<ffi.Pointer<ffi.Char> Function()>();
+
+  ByteArray get_max_c_ulong_as_bytes() {
+    return _get_max_c_ulong_as_bytes();
+  }
+
+  late final _get_max_c_ulong_as_bytesPtr =
+      _lookup<ffi.NativeFunction<ByteArray Function()>>(
+          'get_max_c_ulong_as_bytes');
+  late final _get_max_c_ulong_as_bytes =
+      _get_max_c_ulong_as_bytesPtr.asFunction<ByteArray Function()>();
+
+  int get_max_c_ulonglong() {
+    return _get_max_c_ulonglong();
+  }
+
+  late final _get_max_c_ulonglongPtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedLongLong Function()>>(
+          'get_max_c_ulonglong');
+  late final _get_max_c_ulonglong =
+      _get_max_c_ulonglongPtr.asFunction<int Function()>();
+
+  int get_min_c_ulonglong() {
+    return _get_min_c_ulonglong();
+  }
+
+  late final _get_min_c_ulonglongPtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedLongLong Function()>>(
+          'get_min_c_ulonglong');
+  late final _get_min_c_ulonglong =
+      _get_min_c_ulonglongPtr.asFunction<int Function()>();
+
+  /// # Safety
+  /// The returned pointer must be freed with `free_c_char_ptr`.
+  ffi.Pointer<ffi.Char> get_max_c_ulonglong_as_string() {
+    return _get_max_c_ulonglong_as_string();
+  }
+
+  late final _get_max_c_ulonglong_as_stringPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
+          'get_max_c_ulonglong_as_string');
+  late final _get_max_c_ulonglong_as_string = _get_max_c_ulonglong_as_stringPtr
+      .asFunction<ffi.Pointer<ffi.Char> Function()>();
+
+  ByteArray get_max_c_ulonglong_as_bytes() {
+    return _get_max_c_ulonglong_as_bytes();
+  }
+
+  late final _get_max_c_ulonglong_as_bytesPtr =
+      _lookup<ffi.NativeFunction<ByteArray Function()>>(
+          'get_max_c_ulonglong_as_bytes');
+  late final _get_max_c_ulonglong_as_bytes =
+      _get_max_c_ulonglong_as_bytesPtr.asFunction<ByteArray Function()>();
+
+  int get_max_c_ushort() {
+    return _get_max_c_ushort();
+  }
+
+  late final _get_max_c_ushortPtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedShort Function()>>(
+          'get_max_c_ushort');
+  late final _get_max_c_ushort =
+      _get_max_c_ushortPtr.asFunction<int Function()>();
+
+  int get_min_c_ushort() {
+    return _get_min_c_ushort();
+  }
+
+  late final _get_min_c_ushortPtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedShort Function()>>(
+          'get_min_c_ushort');
+  late final _get_min_c_ushort =
+      _get_min_c_ushortPtr.asFunction<int Function()>();
+
+  NativeResponse get_response() {
+    return _get_response();
+  }
+
+  late final _get_responsePtr =
+      _lookup<ffi.NativeFunction<NativeResponse Function()>>('get_response');
+  late final _get_response =
+      _get_responsePtr.asFunction<NativeResponse Function()>();
+
+  /// # Safety
+  ///
+  /// The `response` argument must be a valid, non-null pointer to a Response.
+  /// It is the caller's responsibility to ensure that the pointer is valid.
+  /// Calling this function with an invalid or null pointer will result in
+  /// undefined behavior.
+  ///
+  /// Make sure not to use the pointer after it has been freed, as it will no
+  /// longer be valid.
+  void free_response(
+    ffi.Pointer<NativeResponse> response,
+  ) {
+    return _free_response(
+      response,
+    );
+  }
+
+  late final _free_responsePtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<NativeResponse>)>>(
+      'free_response');
+  late final _free_response = _free_responsePtr
+      .asFunction<void Function(ffi.Pointer<NativeResponse>)>();
 
   int sum_long_running(
     int a,
@@ -55,4 +366,50 @@ class DashFfiPluginBindings {
           'sum_long_running');
   late final _sum_long_running =
       _sum_long_runningPtr.asFunction<int Function(int, int)>();
+
+  /// # Safety
+  /// It is the caller's responsibility to ensure that the pointer is valid.
+  void free_c_char_ptr(
+    ffi.Pointer<ffi.Char> ptr,
+  ) {
+    return _free_c_char_ptr(
+      ptr,
+    );
+  }
+
+  late final _free_c_char_ptrPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Char>)>>(
+          'free_c_char_ptr');
+  late final _free_c_char_ptr =
+      _free_c_char_ptrPtr.asFunction<void Function(ffi.Pointer<ffi.Char>)>();
+
+  /// # Safety
+  /// It is the caller's responsibility to ensure that the pointer is valid.
+  void free_byte_array(
+    ByteArray arr,
+  ) {
+    return _free_byte_array(
+      arr,
+    );
+  }
+
+  late final _free_byte_arrayPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ByteArray)>>(
+          'free_byte_array');
+  late final _free_byte_array =
+      _free_byte_arrayPtr.asFunction<void Function(ByteArray)>();
+}
+
+class ByteArray extends ffi.Struct {
+  external ffi.Pointer<ffi.Int> data;
+
+  @ffi.Int()
+  external int len;
+}
+
+class NativeResponse extends ffi.Struct {
+  @ffi.Int()
+  external int code;
+
+  external ffi.Pointer<ffi.Char> body;
 }

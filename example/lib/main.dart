@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:dash_ffi_plugin/dash_ffi_plugin.dart' as dash_ffi_plugin;
+// import 'package:dash_ffi_plugin/dash_ffi_plugin.dart' as dash_ffi_plugin;
 
 void main() {
   runApp(const MyApp());
@@ -21,8 +21,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    sumResult = dash_ffi_plugin.sum(1, 2);
-    sumAsyncResult = dash_ffi_plugin.sumAsync(3, 4);
+    // sumResult = dash_ffi_plugin.sum(1, 2);
+    // sumAsyncResult = dash_ffi_plugin.sumAsync(3, 4);
   }
 
   @override
