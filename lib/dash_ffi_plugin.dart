@@ -1,2 +1,2 @@
-export 'sum_sync.dart';
-export 'sum_async.dart';
+export 'async/async_sum.dart';
+export 'sync/sync_tasks.dart';
