@@ -1,0 +1,14 @@
+pub mod get_c_char;
+pub mod get_c_double;
+pub mod get_c_float;
+pub mod get_c_int;
+pub mod get_c_long;
+pub mod get_c_longlong;
+pub mod get_c_schar;
+pub mod get_c_short;
+pub mod get_c_uchar;
+pub mod get_c_uint;
+pub mod get_c_ulong;
+pub mod get_c_ulonglong;
+pub mod get_c_ushort;
+pub mod get_struct;

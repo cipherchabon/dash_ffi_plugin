@@ -6,7 +6,6 @@ fn main() {
     let config = cbindgen::Config {
         language: cbindgen::Language::C,
         braces: cbindgen::Braces::SameLine,
-        cpp_compat: true,
         style: cbindgen::Style::Both,
         ..Default::default()
     };
