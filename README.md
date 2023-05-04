@@ -38,12 +38,12 @@ use std::env;
 fn main() {
     let cargo_manifest_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
 
-    let mut config = cbindgen::Config::default();
-
-    config.language = cbindgen::Language::C;
-    config.braces = cbindgen::Braces::SameLine;
-    config.cpp_compat = true;
-    config.style = cbindgen::Style::Both;
+    let config = cbindgen::Config {
+        language: cbindgen::Language::C,
+        braces: cbindgen::Braces::SameLine,
+        style: cbindgen::Style::Both,
+        ..Default::default()
+    };
 
     cbindgen::Builder::new()
         .with_crate(&cargo_manifest_dir)
@@ -67,7 +67,7 @@ build = "build.rs"
 [dependencies]
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib",  "staticlib"]
 
 [build-dependencies]
 cbindgen = "0.24.3"
@@ -141,6 +141,36 @@ Pod::Spec.new do |s|
 end
 ```
 
+### Android:
+In the android/build.gradle file, comment or remove the following lines related to the shared CMake build with the Android Gradle Plugin:
+
+```
+// Invoke the shared CMake build with the Android Gradle Plugin.
+externalNativeBuild {
+    cmake {
+        path "../src/CMakeLists.txt"
+    }
+}
+```
+In Android Studio, ensure that the NDK and CMake are installed. See image below.
+
+<img src="assets/android-studio-capture.png" width="500">
+
+Install cargo-ndk
+```bash
+$ cargo install cargo-ndk
+```
+
+Add the necessary targets:
+```bash
+$ rustup target add aarch64-linux-android armv7-linux-androideabi
+```
+
+Use the following command to generate the binaries (there's a task in the Makefile.toml that handles this):
+```bash
+$ cargo ndk -t arm64-v8a -t armeabi-v7a -o ../android/src/main/jniLibs build --release
+```
+
 ## Update the Flutter plugin: 
 Modify the plugin's Dart code to use the generated FFI bindings and the Rust library. Make sure to specify the correct dynamic library name for each platform.
 
@@ -153,6 +183,8 @@ const String _libName = 'lib<rust_lib_name>';
 final DynamicLibrary _dylib = () {
   if (Platform.isMacOS) {
     return DynamicLibrary.open('$_libName.dylib');
+  } else if (Platform.isAndroid) {
+    return DynamicLibrary.open('$_libName.so');
   } else {
     throw UnsupportedError('Unknown platform: ${Platform.operatingSystem}');
   }

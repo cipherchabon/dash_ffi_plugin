@@ -17,10 +17,23 @@ description = "Build rust plugin"
 command = "cargo"
 args = ["build", "--release"]
 
+# Copy the Rust plugin's dylib to the macos folder and update its rpath to
+# enable relative path lookup. 
 [tasks.copy-lib-to-macos]
 description = "Copy rust plugin to macos folder"
-command = "cp"
-args = ["target/release/lib${PLUGIN_NAME}.dylib", "../macos"]
+script = [
+'''
+cp $(PWD)/target/release/libferris_ffi_plugin.dylib $(PWD)/../macos/libferris_ffi_plugin.dylib
+install_name_tool -id "@rpath/libferris_ffi_plugin.dylib" $(PWD)/../macos/libferris_ffi_plugin.dylib
+'''
+]
+
+# Run cargo-ndk to build the Rust plugin for Android. The plugin is copied to
+# the android folder so that it can be included in the Android app.
+[tasks.run-cargo-ndk]
+description = "Run cargo-ndk and copy rust plugin to android folder"
+command = "cargo"
+args = ["ndk", "-t", "arm64-v8a", "-t", "armeabi-v7a", "-o", "../android/src/main/jniLibs", "build", "--release"]
 
 [tasks.clean-rust]
 description = "Clean rust plugin"
@@ -48,7 +61,17 @@ dependencies = [
     "test-rust",
     "build-rust",
     "copy-lib-to-macos",
+    "run-cargo-ndk",
     "clean-rust",
     "ffigen",
     "clean-flutter",
+]
+
+[tasks.update]
+description = "Run all tasks"
+dependencies = [
+    "build-rust",
+    "copy-lib-to-macos",
+    "run-cargo-ndk",
+    "ffigen",
 ]

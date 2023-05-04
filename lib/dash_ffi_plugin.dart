@@ -38,6 +38,8 @@ const String _libName = 'libferris_ffi_plugin';
 final DynamicLibrary _dylib = () {
   if (Platform.isMacOS) {
     return DynamicLibrary.open('$_libName.dylib');
+  } else if (Platform.isAndroid) {
+    return DynamicLibrary.open('$_libName.so');
   } else {
     throw UnsupportedError('Unknown platform: ${Platform.operatingSystem}');
   }
