@@ -111,3 +111,10 @@ void free_c_char_ptr(char *ptr);
  * It is the caller's responsibility to ensure that the pointer is valid.
  */
 void free_byte_array(struct ByteArray arr);
+
+/**
+ * # Safety
+ */
+void store_dart_post_cobject(bool (*port)(int64_t, DartCObject*));
+
+void start_rust_code(int64_t callback_port);

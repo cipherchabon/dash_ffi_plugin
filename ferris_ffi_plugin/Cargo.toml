@@ -8,6 +8,7 @@ build = "build.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
+allo-isolate = { version = "^0.1", features = ["catch-unwind"] }
 
 [build-dependencies]
 cbindgen = "0.24.3"

@@ -1,9 +1,12 @@
-import 'package:flutter/material.dart';
-import 'dart:async';
+import 'dart:ffi';
+import 'dart:isolate';
 
-// import 'package:dash_ffi_plugin/dash_ffi_plugin.dart' as dash_ffi_plugin;
+import 'package:dash_ffi_plugin/bindings.dart';
+import 'package:flutter/material.dart';
 
 void main() {
+  bindings.store_dart_post_cobject(NativeApi.postCObject);
+
   runApp(const MyApp());
 }
 
@@ -15,20 +18,28 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late int sumResult;
-  late Future<int> sumAsyncResult;
+  final receivePort = ReceivePort();
+  List<int> messages = [];
 
   @override
   void initState() {
     super.initState();
-    // sumResult = dash_ffi_plugin.sum(1, 2);
-    // sumAsyncResult = dash_ffi_plugin.sumAsync(3, 4);
+    receivePort.listen((message) {
+      setState(() {
+        messages.add(message);
+      });
+    });
+    bindings.start_rust_code(receivePort.sendPort.nativePort);
+  }
+
+  @override
+  void dispose() {
+    receivePort.close();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    const textStyle = TextStyle(fontSize: 25);
-    const spacerSmall = SizedBox(height: 10);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -39,31 +50,11 @@ class _MyAppState extends State<MyApp> {
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
-                const Text(
-                  'This calls a native function through FFI that is shipped as source in the package. '
-                  'The native code is built as part of the Flutter Runner build.',
-                  style: textStyle,
-                  textAlign: TextAlign.center,
-                ),
-                spacerSmall,
-                Text(
-                  'sum(1, 2) = $sumResult',
-                  style: textStyle,
-                  textAlign: TextAlign.center,
-                ),
-                spacerSmall,
-                FutureBuilder<int>(
-                  future: sumAsyncResult,
-                  builder: (BuildContext context, AsyncSnapshot<int> value) {
-                    final displayValue =
-                        (value.hasData) ? value.data : 'loading';
-                    return Text(
-                      'await sumAsync(3, 4) = $displayValue',
-                      style: textStyle,
-                      textAlign: TextAlign.center,
-                    );
-                  },
-                ),
+                for (final message in messages)
+                  Text(
+                    message.toString(),
+                    textAlign: TextAlign.center,
+                  ),
               ],
             ),
           ),
